@@ -24,7 +24,7 @@ export class TableComponent implements OnInit, AfterViewInit {
         data => {
           const csvToRowArray = data.split("\n");
           this.userArray = csvToRowArray.map(element=>{
-            let row = element.split(",");
+            const row = element.split(",");
             return {
               'baseNumber': row[0],
               'classNumber': row[1],
