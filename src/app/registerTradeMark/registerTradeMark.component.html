@@ -78,8 +78,14 @@
 </mat-paginator>
 
 <div [hidden]="noProductsSelected" style="margin: 0 0 30px 0">
-  <p >{{sumUpText}}</p>
-  <p *ngFor="let obj of sumUpObjects">{{obj}}</p>
+  <div style="display:inline-block;">
+    <p >{{sumUpText}}</p>
+    <p *ngFor="let obj of sumUpObjects">{{obj}}</p>
+  </div>
+  <div style="display:inline-block;">
+    {{price}}
+  </div>
+
 </div>
 
 

@@ -13,8 +13,7 @@ import {Router} from '@angular/router';
   templateUrl: './registerTradeMark.component.html',
   styleUrls: ['./registerTradeMark.component.scss']
 })
-export class RegisterTradeMarkComponent  {
-  appService: AppService = new AppService();
+export class RegisterTradeMarkComponent {
   priceConfig: any[];
   price: string;
   jsonURL = 'assets/priceConfig.json';
@@ -81,20 +80,33 @@ export class RegisterTradeMarkComponent  {
       window.alert('Proszę uzepłnij wszystkie pola');
       return;
     }
-
-    this.appService.products = this.parseTransferObjectToString();
-    this.appService.areaRegistered = this.areaRegistered;
-    this.appService.filePath = this.filePath;
-    this.appService.selectedTradeMarkType = this.selectedTradeMarkType;
-    this.appService.price = this.price;
-    this.appService.tradeMarkName = this.tradeMarkName;
-    console.log('aaa')
+    AppService.setProducts(this.parseTransferObjectToString());
+    AppService.setAreaRegistered(this.areaRegistered);
+    AppService.setFilePath(this.filePath);
+    AppService.setSelectedTradeMarkType(this.selectedTradeMarkType);
+    AppService.setPrice(this.price);
+    AppService.setTradeMarkName(this.tradeMarkName);
     this.router.navigateByUrl('/personal-data');
 
     // const url='https://sarey.pl/dev/rajan/wp-admin/admin-ajax.php';
     //
     // window.location.href = `${url}?action=postProduct&products=${this.products}&selectedTradeMarkType=${this.selectedTradeMarkType}&areaRegistered=${this.areaRegistered}&filePath=${this.filePath}&tradeMarkName=${this.tradeMarkName}`;
 
+  }
+
+  calculatePrice() {
+
+    if (this.areaRegistered === 'Polska') {
+      this.price =(850+ this.selectedClasses.reduce((acc: number, val: string) => {
+        acc = acc + Number(this.priceConfig['Poland'][val]);
+        return acc;
+      }, 0)).toString()+'€';
+      return;
+    }
+    this.price = (850+this.selectedClasses.reduce((acc: number, val: string) => {
+      acc = acc + Number(this.priceConfig['EU'][val]);
+      return acc;
+    }, 0)).toString()+'€';
   }
 
   parseTransferObjectToString() {
@@ -107,11 +119,11 @@ export class RegisterTradeMarkComponent  {
   }
 
   fileEvent(e, f: NgForm) {
-    if(!this.isFileExtensionCorrect(e.target.files[0]['name'])){
-     window.alert('Akceptujemy tylko pliki o rozszerzeniach .jpg, .png, .gif, .tif, .tiff, .eps')
-     return;
+    if (!this.isFileExtensionCorrect(e.target.files[0]['name'])) {
+      window.alert('Akceptujemy tylko pliki o rozszerzeniach .jpg, .png, .gif, .tif, .tiff, .eps');
+      return;
     }
-    console.log('aaa')
+    console.log('aaa');
     this.filedata = e.target.files[0];
     this.onSubmitform(f);
   }
@@ -191,6 +203,10 @@ export class RegisterTradeMarkComponent  {
   };
 
   handleAdd(products, classNumber, baseNumber) {
+    if (!this.areaRegistered) {
+      window.alert('Wybierz proszę najpierw gdzie chcesz zarejestrować znak towarowy');
+      return;
+    }
     this.noProductsSelected = false;
     if (!this.selectedClasses.includes(classNumber)) {
       this.selectedClasses.push(classNumber);
@@ -214,7 +230,7 @@ export class RegisterTradeMarkComponent  {
         return obj;
       });
     }
-
+    this.calculatePrice();
   }
 
 }

@@ -4,59 +4,59 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AppService {
-  get price(): string {
+  static getPrice(): string {
     return this._price;
   }
 
-  set price(value: string) {
+  static setPrice(value: string) {
     this._price = value;
   }
 
-  get filePath(): string {
+  static getFilePath(): string {
     return this._filePath;
   }
 
-  set filePath(value: string) {
+  static setFilePath(value: string) {
     this._filePath = value;
   }
 
-  get areaRegistered(): string {
+  static getAreaRegistered(): string {
     return this._areaRegistered;
   }
 
-  set areaRegistered(value: string) {
+  static setAreaRegistered(value: string) {
     this._areaRegistered = value;
   }
 
-  get selectedTradeMarkType(): string {
+  static getSelectedTradeMarkType(): string {
     return this._selectedTradeMarkType;
   }
 
-  set selectedTradeMarkType(value: string) {
+  static setSelectedTradeMarkType(value: string) {
     this._selectedTradeMarkType = value;
   }
 
-  get tradeMarkName(): string {
+  static getTradeMarkName(): string {
     return this._tradeMarkName;
   }
 
-  set tradeMarkName(value: string) {
+  static setTradeMarkName(value: string) {
     this._tradeMarkName = value;
   }
 
-  get products(): string {
+  static getProducts(): string {
     return this._products;
   }
 
-  set products(value: string) {
+  static setProducts(value: string) {
     this._products = value;
   }
-  private _price:string;
-  private _filePath:string;
-  private _areaRegistered:string;
-  private _selectedTradeMarkType:string;
-  private _tradeMarkName:string;
-  private _products:string;
+  private static _price:string;
+  private static _filePath:string;
+  private static _areaRegistered:string;
+  private static _selectedTradeMarkType:string;
+  private static _tradeMarkName:string;
+  private static _products:string;
   constructor() { }
 
 }

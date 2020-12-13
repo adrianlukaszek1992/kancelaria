@@ -11,9 +11,27 @@
 <div [hidden]="!isPerson">
   <label>Imię</label>
   <br>
-  <input type="text">
+  <input type="text" (change)="nameChanged($event)">
   <br>
   <label>Nazwisko</label>
   <br>
-  <input type="text">
+  <input type="text" (change)="lastNameChanged($event)">
+  <br>
+  <label>Adres</label>
+  <br>
+  <input type="text" (change)="addressChanged($event)">
 </div>
+<div [hidden]="!isCompany">
+  <label>Nazwa firmy</label>
+  <br>
+  <input type="text" (change)="companyNameChanged($event)">
+  <br>
+  <label>NIP</label>
+  <br>
+  <input type="text" (change)="nipChanged($event)">
+  <br>
+  <label>Adres</label>
+  <br>
+  <input type="text"(change)="companyAddressChanged($event)">
+</div>
+<button (click)="submit()">Wyślij</button>
