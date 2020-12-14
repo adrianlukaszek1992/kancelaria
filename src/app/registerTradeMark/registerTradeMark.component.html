@@ -1,38 +1,22 @@
 <label class="example-radio-group-label">Co chcesz zarejestrować?</label>
-<mat-radio-group
-  aria-labelledby="example-radio-group-label"
-  class="example-radio-group"
-  [(ngModel)]="selectedTradeMarkType">
-  <mat-radio-button class="example-radio-button" *ngFor="let tradeMarkType of tradeMarkTypes" [value]="tradeMarkType" (change)="selectedTradeMarkTypeChanged(tradeMarkType)">
-    {{tradeMarkType}}
-  </mat-radio-button>
-</mat-radio-group>
 
 
-<div [hidden]="isTrademarkTextHidden">
-  <br>
-  <label class="example-radio-group-label">Wpisz nazwę swojego znaku towarowego</label>
-  <br>
-    <input type="text"   name="tradeMarkName" (change)="tradeMarkNameChanged($event)"/>
 
-  <br>
-</div>
 
-<div [hidden]="isFileUploadHidden">
+<div>
   <br>
-  <label class="example-radio-group-label">Wybierz plik który będzie reprezentował Twój znak towarowy</label>
+  <label class="example-radio-group-label">Wybierz plik który będzie reprezentował Twój wzór przemysłowy</label>
   <form #f="ngForm">
-    <input type="file"  name="myFile" (change)="fileEvent($event,f)" />
-<!--    <button>Umieść plik</button>-->
+    <input type="file"  name="myFile" (change)="fileEvent($event,f)" multiple/>
   </form>
   <br>
 </div>
 
 
-<a href="https://sarey.pl/dev/rajan/?page_id=21">Chce zarejstrować inny typ znaku towarowego</a><br>
-<a href="https://sarey.pl/dev/rajan/?page_id=239">Więcej informacji na temat znaków towarowych</a><br>
+<a href="https://sarey.pl/dev/rajan/?page_id=21">Chce zarejstrować inny typ wzoru przemysłowego</a><br>
+<a href="https://sarey.pl/dev/rajan/?page_id=239">Więcej informacji na temat wzorós przemysłowych</a><br>
 
-<label class="example-radio-group-label">Gdzie chcesz zarejestrować znak towarowy?</label>
+<label class="example-radio-group-label">Gdzie chcesz zarejestrować wzór przemysłowy?</label>
 <mat-radio-group
   aria-labelledby="example-radio-group-label"
   class="example-radio-group"
