@@ -9,3 +9,216 @@ mat-sidenav {
 main {
   padding: 10px;
 }
+
+//style od Mai
+
+.container{
+  width:1100px;
+  background:#f4f4f4;
+  border-radius:50px;
+  margin:0 auto;
+  padding:50px;
+  font-family:poppins;
+  color:#062951;
+}
+.box{
+  display:flex;
+  border-bottom:1px solid #e4e4e4;
+  margin-top:50px;
+  padding-bottom:50px;
+}
+
+.box:last-child{
+  border:none;
+}
+
+.left_side, .right_side{
+  width:50%;
+  max-width:50%;
+  padding-right:50px;
+}
+.h3_title{
+  color:#DAB16F;
+  font: 800 32px/52px poppins;
+  position:relative;
+  padding:0 0 40px 0;
+}
+.h3_title::before{
+  content:'';
+  border-bottom:6px solid #DAB16F;
+  width:50px;
+  position:absolute;
+  top:60px;
+}
+.sub_title{
+  margin:0;
+  color:#062951;
+  font: 800 21px/29px poppins;
+  margin: 0 0 50px 0;
+}
+.inny_ql a{
+  font:500 14px/29px poppins;
+  color:#DAB16F;
+  text-decoration: none;
+}
+.inny_ql{
+  margin-top:30px;
+}
+.right_title{
+  margin:0;
+  color:#062951;
+  font: 300 14px/20px poppins;
+  letter-spacing:4px;
+  text-transform:uppercase;
+}
+.tooltipek{
+  font:300 12px/18px poppins;
+  color:#062951;
+}
+.button_tip a button{
+  border-radius: 50px;
+  border: none;
+  background: #062951;
+  padding: 5px 20px;
+  color: #fff;
+  text-transform: uppercase;
+  font: 700 10px/20px raleway;
+  letter-spacing: 4px;
+  margin-top:30px;
+  cursor:pointer;
+}
+.searchbarr{
+  width:90%;
+  background: #fff;
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #e4e4e4;
+  border-radius: 50px;
+  margin-bottom: 50px;
+  font:500 18px/36px raleway;
+  color:#062951;
+  outline:none;
+}
+table{
+  width:90%;
+  border-collapse: collapse;
+}
+tr{
+  border-bottom:1px solid #e4e4e4;
+}
+th{
+  font:400 11px/36px poppins;
+  color:#062951;
+  text-transform:uppercase;
+  letter-spacing:4px;
+  text-align:left;
+}
+.tdklasa{
+  font:400 11px/36px poppins;
+  color:#062951;
+  letter-spacing:3px;
+}
+.tdwykaz{
+  font:600 12px/48px poppins;
+  color:#062951;
+  letter-spacing:1px;
+}
+.tdaj{
+  position:relative;
+  padding-left:20px;
+}
+.tdaj::after{
+  content: '+';
+  background: #DAB16F;
+  border-radius: 50%;
+  padding: 0 5px;
+  color: #fff;
+
+}
+.button_dalej a button{
+  background: #DAB16F;
+  color: #fff;
+  border: none;
+  font: 600 14px/24px raleway;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  padding: 10px 35px;
+  border-radius: 50px;
+  margin-top:50px;
+  cursor:pointer;
+}
+
+
+/* ukryte */
+.ukryte{
+
+  display:block;
+}
+.text-cont-in {
+  width: 80%;
+  padding: 10px 25px;
+  border-radius: 50px;
+  border: 1px solid #062951;
+  outline:none;
+}
+
+
+
+/* Radios */
+
+.radio-cont {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font:600 18px/24px raleway;
+  color:#062951;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+.radio-cont input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+.checkmark {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  height: 14px;
+  width: 14px;
+  background-color: #fff;
+  border-radius: 50%;
+  border:1px solid #062951;
+}
+
+
+
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+
+.radio-cont input:checked ~ .checkmark:after {
+  display: block;
+}
+
+
+.radio-cont .checkmark:after {
+  top: 3px;
+  left: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #062951;
+}

@@ -14,7 +14,11 @@ import {Router} from '@angular/router';
   styleUrls: ['./registerTradeMark.component.scss']
 })
 export class RegisterTradeMarkComponent {
+  analysisTypes = ['Podstawowa', 'Premium'];
+  defaultImage: string;
+  analysisTypeRegistred: string;
   priceConfig: any[];
+  isLoading = true;
   price: string;
   jsonURL = 'assets/priceConfig.json';
   filePath: string;
@@ -42,7 +46,7 @@ export class RegisterTradeMarkComponent {
   filedata: any;
 
   constructor(private http: HttpClient, private router: Router) {
-    this.http.get('./assets/data.csv', {responseType: 'text'})
+    this.http.get('./assets/trademark.csv', {responseType: 'text'})
       .subscribe(
         data => {
           const csvToRowArray = data.split('\n');
@@ -56,12 +60,15 @@ export class RegisterTradeMarkComponent {
           });
 
           this.dataSource = new MatTableDataSource(this.userArray);
+          this.paginator.pageSize = 10;
           this.dataSource.paginator = this.paginator;
+          this.isLoading = false;
           this.dataSource.sort = this.sort;
           console.log(this.userArray);
         },
         error => {
           console.log(error);
+          this.isLoading = false;
         }
       );
     this.getJSON().subscribe(data => {
@@ -94,20 +101,29 @@ export class RegisterTradeMarkComponent {
 
   }
 
-  calculatePrice() {
-
-    if (this.areaRegistered === 'Polska') {
-      this.price =(850+ this.selectedClasses.reduce((acc: number, val: string) => {
-        acc = acc + Number(this.priceConfig['Poland'][val]);
-        return acc;
-      }, 0)).toString()+'€';
+  analysisTypeChanged(analysisType) {
+    this.analysisTypeRegistred = analysisType;
+    if (analysisType === 'Podstawowa') {
+      this.price = '35';
       return;
     }
-    this.price = (850+this.selectedClasses.reduce((acc: number, val: string) => {
-      acc = acc + Number(this.priceConfig['EU'][val]);
-      return acc;
-    }, 0)).toString()+'€';
+    this.price = '85';
   }
+
+  // calculatePrice() {
+  //
+  //   if (this.areaRegistered === 'Polska') {
+  //     this.price =(850+ this.selectedClasses.reduce((acc: number, val: string) => {
+  //       acc = acc + Number(this.priceConfig['Poland'][val]);
+  //       return acc;
+  //     }, 0)).toString()+'€';
+  //     return;
+  //   }
+  //   this.price = (850+this.selectedClasses.reduce((acc: number, val: string) => {
+  //     acc = acc + Number(this.priceConfig['EU'][val]);
+  //     return acc;
+  //   }, 0)).toString()+'€';
+  // }
 
   parseTransferObjectToString() {
     let result = '';
@@ -123,9 +139,16 @@ export class RegisterTradeMarkComponent {
       window.alert('Akceptujemy tylko pliki o rozszerzeniach .jpg, .png, .gif, .tif, .tiff, .eps');
       return;
     }
-    console.log('aaa');
     this.filedata = e.target.files[0];
+    console.log(this.filedata);
     this.onSubmitform(f);
+  }
+
+  areaChanged(area) {
+    this.areaRegistered = area;
+    // if(this.selectedClasses.length){
+    //   this.calculatePrice();
+    // }
   }
 
   isFileExtensionCorrect(fileName) {
@@ -163,7 +186,6 @@ export class RegisterTradeMarkComponent {
     }).subscribe(data => {
       this.filePath = data['data'];
     });
-
   }
 
   public getJSON(): Observable<any> {
@@ -175,25 +197,6 @@ export class RegisterTradeMarkComponent {
     console.log(element);
   }
 
-  private checkUpload: any;
-
-  uploadFile(event) {
-    console.log(event.target.files[0]); // outputs the first file
-    // Check if file has been uploaded
-    this.checkUpload = setInterval(() => {
-      const checkFile = event.target.files[0];
-      if (checkFile) {
-        this.processFile(event);
-      }
-    }, 500);
-  }
-
-// Runs after user uploads file;
-  processFile(event) {
-    clearInterval(this.checkUpload);
-    const fileInput = event.target.files[0];
-  }
-
   public customSort = (event) => {
     console.log(event);
   };
@@ -202,11 +205,11 @@ export class RegisterTradeMarkComponent {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   };
 
-  handleAdd(products, classNumber, baseNumber) {
-    if (!this.areaRegistered) {
-      window.alert('Wybierz proszę najpierw gdzie chcesz zarejestrować znak towarowy');
-      return;
-    }
+  handleAdd(products: string, classNumber: string, baseNumber: string) {
+    // if (!this.areaRegistered) {
+    //   window.alert('Wybierz proszę najpierw gdzie chcesz zarejestrować znak towarowy');
+    //   return;
+    // }
     this.noProductsSelected = false;
     if (!this.selectedClasses.includes(classNumber)) {
       this.selectedClasses.push(classNumber);
@@ -219,7 +222,7 @@ export class RegisterTradeMarkComponent {
       this.selectedProducts.push(products);
       this.sumUpObjects = this.sumUpObjects.map(obj => {
         if (obj.includes(classNumber)) {
-          obj = obj + ' ' + products;
+          obj = obj + ', ' + products;
         }
         return obj;
       });
@@ -230,7 +233,20 @@ export class RegisterTradeMarkComponent {
         return obj;
       });
     }
-    this.calculatePrice();
+    //this.calculatePrice();
+  }
+
+  delete(i) {
+    console.log(this.selectedClasses);
+    console.log(this.sumUpObjects[i]);
+    const classToRemove = this.sumUpObjects[i].slice(this.sumUpObjects[i].indexOf('Klasa') + 5, this.sumUpObjects[i].indexOf(':'));
+    this.selectedClasses = this.selectedClasses.reduce((acc :any, item :string) => {
+      if (item === classToRemove) {
+        return acc;
+      }
+      return [...acc, item];
+    }, []);
+    this.sumUpObjects.splice(i, 1);
   }
 
 }

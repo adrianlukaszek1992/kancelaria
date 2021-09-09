@@ -1,92 +1,188 @@
-<label class="example-radio-group-label">Co chcesz zarejestrować?</label>
-<mat-radio-group
-  aria-labelledby="example-radio-group-label"
-  class="example-radio-group"
-  [(ngModel)]="selectedTradeMarkType">
-  <mat-radio-button class="example-radio-button" *ngFor="let tradeMarkType of tradeMarkTypes" [value]="tradeMarkType" (change)="selectedTradeMarkTypeChanged(tradeMarkType)">
-    {{tradeMarkType}}
-  </mat-radio-button>
-</mat-radio-group>
+<div class="container">
+  <div class="h3_title">Rejestracja znaku towarowego</div>
+  <div class="box">
+    <div class="left_side">
 
+      <div class="sub_title">Jaki rodzaj znaku chcesz zarejestrować?</div>
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="formularz"
+        [(ngModel)]="selectedTradeMarkType">
+        <mat-radio-button class="radio-cont" *ngFor="let tradeMarkType of tradeMarkTypes" [value]="tradeMarkType"
+                          (change)="selectedTradeMarkTypeChanged(tradeMarkType)">
+          {{tradeMarkType}}
+        </mat-radio-button>
+      </mat-radio-group>
 
-<div [hidden]="isTrademarkTextHidden">
-  <br>
-  <label class="example-radio-group-label">Wpisz nazwę swojego znaku towarowego</label>
-  <br>
-    <input type="text"   name="tradeMarkName" (change)="tradeMarkNameChanged($event)"/>
+      <div class="ukryte">
+        <div [hidden]="isTrademarkTextHidden">
+          <br>
+          <label class="example-radio-group-label">Wpisz nazwę swojego znaku towarowego</label>
+          <br>
+          <input type="text" name="tradeMarkName" (change)="tradeMarkNameChanged($event)"/>
 
-  <br>
-</div>
+          <br>
+        </div>
+      </div>
+      <div [hidden]="isFileUploadHidden">
 
-<div [hidden]="isFileUploadHidden">
-  <br>
-  <label class="example-radio-group-label">Wybierz plik który będzie reprezentował Twój znak towarowy</label>
-  <form #f="ngForm">
-    <input type="file"  name="myFile" (change)="fileEvent($event,f)" />
-<!--    <button>Umieść plik</button>-->
-  </form>
-  <br>
-</div>
+        <label class="example-radio-group-label">Wybierz plik który będzie reprezentował Twój znak towarowy</label>
+        <form #f="ngForm">
+          <input type="file" name="myFile" (change)="fileEvent($event,f)"/>
+          <!--    <button>Umieść plik</button>-->
+        </form>
 
+      </div>
 
-<a href="https://sarey.pl/dev/rajan/?page_id=21">Chce zarejstrować inny typ znaku towarowego</a><br>
-<a href="https://sarey.pl/dev/rajan/?page_id=239">Więcej informacji na temat znaków towarowych</a><br>
-
-<label class="example-radio-group-label">Gdzie chcesz zarejestrować znak towarowy?</label>
-<mat-radio-group
-  aria-labelledby="example-radio-group-label"
-  class="example-radio-group"
-  [(ngModel)]="areaRegistered">
-  <mat-radio-button class="example-radio-button" *ngFor="let area of areas" [value]="area">
-    {{area}}
-  </mat-radio-button>
-</mat-radio-group>
-<br>
-
-<h2 style="text-align: center">Znajdź Towar</h2>
-<div fxLayout fxLayoutAlign="center center">
-  <mat-form-field fxFlex="40%">
-    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Wyszukaj towary które chcesz objąć ochroną">
-  </mat-form-field>
-</div>
-<table mat-table [dataSource]="dataSource" matSort matSortStart="desc" (matSortChange)="customSort($event)">
-  <ng-container matColumnDef="classNumber">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Klasa </th>
-    <td mat-cell *matCellDef="let element" (click)="handleClick(element.baseNumber)"> {{element.classNumber}} </td>
-  </ng-container>
-
-
-  <ng-container matColumnDef="products">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Wykaz Towarów </th>
-    <td mat-cell *matCellDef="let element"> {{element.products}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="add">
-    <th mat-header-cell *matHeaderCellDef> Dodaj </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="primary" (click)="handleAdd(element.products, element.classNumber, element.baseNumber)">
-        <mat-icon class="mat-18">add</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-<mat-paginator [pageSize]="2" [pageSizeOptions]="[2, 4, 6, 10, 20]">
-</mat-paginator>
-
-<div [hidden]="noProductsSelected" style="margin: 0 0 30px 0">
-  <div style="display:inline-block;">
-    <p >{{sumUpText}}</p>
-    <p *ngFor="let obj of sumUpObjects">{{obj}}</p>
+      <div class="inny_ql">
+        <a href="https://sarey.pl/dev/rajan/?page_id=21">Chce zarejstrować inny typ znaku towarowego</a>
+      </div>
+    </div>
+    <div class="right_side">
+      <h3 class="right_title">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque</h3>
+      <p class="tooltipek">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non
+        felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a,
+        ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in,
+        dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames
+        ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer aliquam
+        purus. </p>
+      <p class="button_tip"><a href="https://sarey.pl/dev/rajan/?page_id=239">
+        <button>dowiedz się więcej</button>
+      </a></p>
+    </div>
   </div>
-  <div style="display:inline-block;">
-    {{price}}
+  <div class="box">
+    <div class="left_side">
+      <label class="sub_title">Wybierz rodzaj analizy</label>
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="formularz"
+        [(ngModel)]="analysisTypeRegistred">
+        <mat-radio-button class="radio-cont" *ngFor="let analysisType of analysisTypes" [value]="analysisType"
+                          (change)="analysisTypeChanged(analysisType)">
+          {{analysisType}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="right_side">
+      <h3 class="right_title">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque</h3>
+      <p class="tooltipek">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non
+        felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a,
+        ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in,
+        dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada
+        fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer
+        aliquam purus. </p>
+      <p class="button_tip"><a href="#">
+        <button>dowiedz się więcej</button>
+      </a></p>
+    </div>
+  </div>
+  <div class="box">
+    <div class="left_side">
+      <label class="sub_title">Gdzie chcesz zarejestrować znak towarowy?</label>
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="formularz"
+        [(ngModel)]="areaRegistered">
+        <mat-radio-button class="radio-cont" *ngFor="let area of areas" [value]="area"
+                          (change)="areaChanged(area)">
+          {{area}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="right_side">
+      <div class="sub_title">
+        <h3 class="right_title">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque</h3>
+        <p class="tooltipek">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non
+          felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a,
+          ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in,
+          dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames
+          ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer aliquam
+          purus. </p>
+        <p class="button_tip"><a href="#">
+          <button>dowiedz się więcej</button>
+        </a></p>
+      </div>
+    </div>
   </div>
 
+  <div class="box">
+
+    <div class="left_side">
+      <div [hidden]="noProductsSelected" style="margin: 0 0 30px 0">
+        <div style="display:inline-block;">
+          <p>{{sumUpText}}</p>
+
+          <div *ngFor="let obj of sumUpObjects;let i = index"(click)="delete(i)">{{obj}}  <div style="color: red">Usuń</div>  </div>
+        </div>
+        <br>
+        <div style="display:inline-block;">
+          <p>Cena: {{price}} PLN</p>
+        </div>
+      </div>
+      <div class="sub_title">Znajdź towar</div>
+      <div class="szukaj">
+        <mat-form-field fxFlex="100%">
+          <input matInput type="search" (keyup)="doFilter($event.target.value)"
+                 class="searchbarr"
+                 placeholder="Wyszukaj towary które chcesz objąć ochroną">
+        </mat-form-field>
+      </div>
+      <table mat-table class="towary" [dataSource]="dataSource" matSort matSortStart="desc"
+             (matSortChange)="customSort($event)">
+        <ng-container matColumnDef="classNumber" class="towary">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Klasa</th>
+          <td class="tdklasa" mat-cell *matCellDef="let element"
+              (click)="handleClick(element.baseNumber)"> {{element.classNumber}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="products">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Wykaz Towarów</th>
+          <td class="tdwykaz" mat-cell *matCellDef="let element"> {{element.products}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="add">
+          <th mat-header-cell *matHeaderCellDef> Dodaj</th>
+          <td class="tdaj" mat-cell *matCellDef="let element">
+            <button mat-icon-button color="primary"
+                    (click)="handleAdd(element.products, element.classNumber, element.baseNumber)">
+              <mat-icon class="mat-18">add</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <div *ngIf="isLoading"
+           style="display: flex; justify-content: center; align-items: center; background: white;">
+        <mat-progress-spinner
+          color="primary"
+          mode="indeterminate">
+        </mat-progress-spinner>
+      </div>
+      <mat-paginator [pageSize]="2" [pageSizeOptions]="[2, 4, 6, 10, 20]">
+      </mat-paginator>
+    </div>
+    <div class="right_side">
+      <h3 class="right_title">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque</h3>
+      <p class="tooltipek">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non
+        felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a,
+        ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in,
+        dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames
+        ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer aliquam purus.
+        Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus
+        orci luctus non</p>
+
+    </div>
+  </div>
+
+
+  <p class="button_dalej">
+    <button (click)="handleNext()">Dalej</button>
+  </p>
 </div>
 
-
-<button (click)="handleNext()">Dalej</button>
