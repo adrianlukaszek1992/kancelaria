@@ -1,19 +1,55 @@
+<div class="container">
+  <div class="full-box">
 
-<label class="example-radio-group-label">Kogo reprezentujesz?</label>
-<mat-radio-group
-  aria-labelledby="example-radio-group-label"
-  class="example-radio-group"
-  [(ngModel)]="selectedCustomerType">
-  <mat-radio-button class="example-radio-button" *ngFor="let customerType of customerTypes" [value]="customerType" (change)="selectedCustomerTypeChanged(customerType)">
-    {{customerType}}
-  </mat-radio-button>
-</mat-radio-group>
-<div [hidden]="!isPerson">
-  <label>Imię</label>
-  <br>
-  <input type="text">
-  <br>
-  <label>Nazwisko</label>
-  <br>
-  <input type="text">
+    <div class="sub_title">Kogo reprezentujesz</div>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="formularz"
+      [(ngModel)]="selectedCustomerType">
+      <mat-radio-button class="radio-cont" *ngFor="let customerType of customerTypes" [value]="customerType" (change)="selectedCustomerTypeChanged(customerType)">
+        {{customerType}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <div [hidden]="!isPerson" >
+
+      <p><label class="text-cont ">Imię </label></p><input type="text" class="text-cont-in short" (change)="nameChanged($event)">
+
+      <p><label class="text-cont ">Nazwisko</label></p><input type="text" class="text-cont-in short" (change)="lastNameChanged($event)">
+
+      <p><label class="text-cont ">Ulica</label></p><input type="text" class="text-cont-in short" (change)="streetChanged($event)">
+
+      <p><label class="text-cont ">Nr nudynku</label></p><input type="text" class="text-cont-in short" (change)="houseChanged($event)">
+
+      <p><label class="text-cont ">Nr lokalu</label></p><input type="text" class="text-cont-in short" (change)="appartmentChanged($event)">
+
+      <p><label class="text-cont ">Kod pocztowy</label></p><input type="text" class="text-cont-in short" (change)="postalCodeChanged($event)">
+
+      <p><label class="text-cont ">Miejscowość</label></p><input type="text" class="text-cont-in short" (change)="cityChanged($event)">
+    </div>
+    <div [hidden]="!isCompany" >
+
+      <p><label class="text-cont ">Nazwa firmy</label></p><input type="text" class="text-cont-in short" (change)="companyNameChanged($event)">
+
+      <p><label class="text-cont ">NIP</label></p><input type="text" class="text-cont-in short" (change)="nipChanged($event)">
+      <p style="color: red" [hidden] ="correctNIP">Niepoprawny NIP</p>
+      <p><label class="text-cont ">Ulica</label></p><input type="text" class="text-cont-in short" (change)="companyStreetChanged($event)">
+
+      <p><label class="text-cont ">Nr nudynku</label></p><input type="text" class="text-cont-in short" (change)="companyHouseChanged($event)">
+
+      <p><label class="text-cont ">Nr lokalu</label></p><input type="text" class="text-cont-in short" (change)="companyAppartmentChanged($event)">
+
+      <p><label class="text-cont ">Kod pocztowy</label></p><input type="text" class="text-cont-in short" (change)="companyPostalCodeChanged($event)">
+
+      <p><label class="text-cont ">Miejscowość</label></p><input type="text" class="text-cont-in short" (change)="companyCityChanged($event)">
+    </div>
+    <div [hidden]="!isCompany && !isPerson" >
+      <p><label class="text-cont ">Email</label></p><input type="text" class="text-cont-in short"(change)="emailChanged($event)">
+      <p style="color: red" [hidden] ="correctEmail">Niepoprawny adres email</p>
+      <p><label class="text-cont ">Telefon</label></p><input type="text" class="text-cont-in short"(change)="phoneNumberChanged($event)">
+      <p style="color: red" [hidden] ="correctPhone">Niepoprawny numer telefonu</p>
+      <p><button class="button_wyslij" (click)="submit()">Wyślij</button></p>
+    </div>
+
+
+  </div>
 </div>
